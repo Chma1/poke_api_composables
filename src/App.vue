@@ -1,29 +1,32 @@
 <script setup>
-// import Loadingpokemon from '@/components/loadingpokemon.vue';
-
-import { RouterLink, RouterView } from 'vue-router'
-import { ref } from 'vue';
-// import ListPokemon from './components/ListPokemon.vue'
-const loading = ref(false)
-
-
-// const app=()=>{
-//   loading.value=true
-//   setTimeout(()=>loading.value=false,1000)
-// }
-
+import { RouterLink, RouterView, useRouter } from 'vue-router'
+const router = useRouter()
+const homePage = () => {
+  router.push(`/`)
+}
 </script>
 
 <template>
-      <div class="container">
-        <nav class="nav navbar-expland-lg bg-info ">
-          <RouterLink class="nav-link" to="/">Home</RouterLink>
-          <RouterLink class="nav-link" to="/about">About</RouterLink>
-          <RouterLink class="nav-link" to="/pokedex">Pokedex</RouterLink>
-        </nav>
+  <nav class="navbar navbar-expand-md bg-danger ">
+    <div class="container">
+      <a class="nav-logo text-uppercase" @click="homePage()"> <b>
+          poke App
+        </b></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <RouterLink class="nav-link " to="/">Home</RouterLink>
+            <RouterLink class="nav-link" to="/about">About</RouterLink>
+            <RouterLink class="nav-link" to="/pokedex">Pokedex</RouterLink>
+            <RouterLink class="nav-link " to="/favorite">Favorite</RouterLink>
+        </ul>
       </div>
-      <!-- <ListPokemon/> -->
-  
+    </div>
+  </nav>
+
 
   <RouterView />
 </template>
@@ -36,8 +39,16 @@ const loading = ref(false)
 }
 
 .nav-link:hover {
-  color: rgb(5, 5, 177);
+  color: rgb(255, 251, 3);
   font-size: 18px;
   transition: 0.5s;
+}
+
+.nav-logo {
+  cursor: pointer;
+  color: rgb(49, 49, 47);
+  text-decoration: none;
+  font-size: 20px;
+  margin-top: -5px;
 }
 </style>
