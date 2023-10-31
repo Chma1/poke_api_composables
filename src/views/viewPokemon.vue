@@ -2,45 +2,30 @@
 import LoadingPokemon from "@/components/LoadingPokemon.vue";
 import { getData } from '@/hooks/getData.js'
 
-const { showPokemon, loading, getPokemon, } = getData()
-
-showPokemon('https://pokeapi.co/api/v2/pokemon');
-
+const { showPokemon, loading, getPokemon } = getData()
 const pokemons = getPokemon
-// const getPokemon = async () => {
-//     loading.value=true
-//     try {
-//         const pokemon = await axios.get("https://pokeapi.co/api/v2/pokemon");
-//         savePokemon.value = await pokemon.data.results;
-//         // console.log(savePokemon.value);
-//     } catch (error) {
-//         console.log(error);
-//     }finally{
-//         setTimeout(()=>loading.value=false,1000)
-//     }
-// };
-
-
-
+showPokemon('https://pokeapi.co/api/v2/pokemon');
 </script>
 <template>
+
     <LoadingPokemon v-if="loading" />
-    <div class="container my-3 text-center" v-else>
+    <div class="col-sm-12 container " v-else>
         <div class="row">
-            <div class="card col-sm-3 mt-2  m-1 " v-for="(poke, i) in pokemons?.results" :key="i">
-                <div class="card-head text-center m-2 p-2">
-                    <router-link :to="`/pokedex/${poke.name}`" class="nav_pokemon text-dark">{{ poke.name
+            <div class="col-sm-3  mb-2 mt-3" v-for="(poke, i) in pokemons?.results" :key="i">
+                <div class="d-flex align-items-center card border p-3">
+                    <router-link :to="`/pokedex/${poke.name}`" class="nav_pokemon text-dark ">{{ poke.name
                     }}</router-link>
                 </div>
             </div>
-            <div class="mt-2 text-center">
+
+
+            <div class="mt-3 text-center">
                 <button class="btn btn-danger me-1" @click="showPokemon(pokemons.previous)"
                     :disabled="!pokemons.previous">Previus</button>
-                    
-                          <button class="btn btn-primary " @click="showPokemon(pokemons.next)"
-                              :disabled="!pokemons.next">Next</button>
-
+                <button class="btn btn-primary " @click="showPokemon(pokemons.next)"
+                    :disabled="!pokemons.next">Next</button>
             </div>
+
 
 
         </div>
@@ -49,5 +34,13 @@ const pokemons = getPokemon
 <style scoped>
 .nav_pokemon {
     text-decoration: none;
+}
+
+.card {
+    color: #000;
+}
+
+.card:hover {
+    background: rgba(255, 0, 0, 0.575);
 }
 </style>

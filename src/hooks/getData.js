@@ -5,10 +5,6 @@ export const getData = () => {
   const getPokemon = ref({});
   const loading = ref(false);
   const errorPokemon = ref(null);
-  // pagination
-  const indexPage = 0;
-  const startPage = ref(indexPage);
-  const endPage = ref(3);
   // consumo de la api por axios
   const showPokemon = async (url) => {
     loading.value = true;
@@ -28,7 +24,7 @@ export const getData = () => {
   return {
     loading,
     getPokemon,
-    errorPokemon,  
+    errorPokemon,
     showPokemon,
     getData,
   };

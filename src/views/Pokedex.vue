@@ -2,7 +2,11 @@
 import LoadingPokemon from "@/components/LoadingPokemon.vue";
 import { getData } from '@/hooks/getData.js'
 import { useRoute, useRouter } from "vue-router";
+import { useFavoriteStore } from "@/store/favorites";
 
+const useFavorite = useFavoriteStore()
+const { addFavorite} = useFavorite
+const {findPokemon}=useFavorite
 const { getPokemon, showPokemon, loading, errorPokemon } = getData()
 const router = useRouter();
 const route = useRoute();
@@ -10,7 +14,7 @@ const backPage = () => {
   router.push(`/pokedex`);
 };
 const detailPokemon = getPokemon
-console.log(detailPokemon);
+// console.log(detailPokemon);
 
 showPokemon(`https://pokeapi.co/api/v2/pokemon/${route.params.name}`);
 // const showPokemon = async () => {
@@ -30,7 +34,6 @@ showPokemon(`https://pokeapi.co/api/v2/pokemon/${route.params.name}`);
 // };
 </script>
 <template>
-  <pre>{{ detailPokemon }}</pre>
   <LoadingPokemon v-if="loading" />
   <div class="container" v-else>
     <div class="alert alert-danger my-2 text-center" v-if="errorPokemon">{{ errorPokemon }}</div>
@@ -43,6 +46,10 @@ showPokemon(`https://pokeapi.co/api/v2/pokemon/${route.params.name}`);
       <div class="text-center">
         <img :src="detailPokemon.sprites?.other?.home?.front_default" alt="pokemon" class="img_pokemon" />
       </div>
+      <div class="text-center">
+           <button class="btn btn-warning mt-3 text-center"  @click="addFavorite(detailPokemon)" :disabled="findPokemon(detailPokemon.name)">Favorite ❤</button>
+      </div>
+
     </div>
   </div>
   <div class="text-end">

@@ -3,13 +3,16 @@ import HomeView from "../views/HomeView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+  // activo de forma global
+  linkActiveClass: "active",
   routes: [
     {
       path: "/",
       name: "home",
       component: HomeView,
-    },
-    {
+    }, 
+  
+     {
       path: "/about",
       name: "about",
       // route level code-splitting
@@ -28,6 +31,13 @@ const router = createRouter({
       name: "poke",
       component: () => import("../views/Pokedex.vue"),
     },
+    {
+      path: "/favorite",
+      name: "favorite",
+      component: () => import("../views/FavoritePokemon.vue"),
+    },
+
+    // End page
     {
       path: "/:catchAll(.*)",
       name: "error404",
